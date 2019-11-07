@@ -4,7 +4,7 @@ A module for ProcessWire CMS/CMF. Allows the use of the [EasySlugger](https://gi
 
 ## Installation
 
-[Install](http://modules.processwire.com/install-uninstall/) the Sanitizer Transliterate module.
+[Install](http://modules.processwire.com/install-uninstall/) the Sanitizer EasySlugger module.
 
 ## Usage
 
