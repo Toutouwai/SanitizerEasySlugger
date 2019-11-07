@@ -1,0 +1,102 @@
+<?php namespace ProcessWire;
+
+class SanitizerEasySlugger extends WireData implements Module {
+
+	/**
+	 * Module information
+	 */
+	public static function getModuleInfo() {
+		return array(
+			'title' => 'Sanitizer EasySlugger',
+			'summary' => 'Allows the use of the EasySlugger library as Sanitizer methods.',
+			'version' => '0.1.0',
+			'author' => 'Robin Sallis',
+			'href' => 'https://github.com/Toutouwai/SanitizerSlugger',
+			'icon' => 'globe',
+			'autoload' => true,
+			'requires' => 'ProcessWire>=3.0.0, PHP>=5.4.0',
+		);
+	}
+
+	protected $default_options = [
+		'separator' => '-',
+		'unique' => false,
+	];
+
+	/**
+	 * Ready
+	 */
+	public function ready() {
+		$this->addHookMethod('Sanitizer::slugger', $this, 'slugger');
+		$this->addHookMethod('Sanitizer::utf8Slugger', $this, 'utf8Slugger');
+		$this->addHookMethod('Sanitizer::seoSlugger', $this, 'seoSlugger');
+		$this->addHookMethod('Sanitizer::seoUtf8Slugger', $this, 'seoUtf8Slugger');
+	}
+
+	/**
+	 * Sanitizer::slugger()
+	 *
+	 * @param HookEvent $event
+	 */
+	protected function slugger(HookEvent $event) {
+		require_once __DIR__ . '/EasySlugger/SluggerInterface.php';
+		require_once __DIR__ . '/EasySlugger/Slugger.php';
+		$value = $event->arguments(0);
+		$options = $this->getOptions($event->arguments(1));
+		$method = $options['unique'] ? 'uniqueSlugify' : 'slugify';
+		$event->return = \EasySlugger\Slugger::$method($value, $options['separator']);
+	}
+
+	/**
+	 * Sanitizer::utf8Slugger()
+	 *
+	 * @param HookEvent $event
+	 */
+	protected function utf8Slugger(HookEvent $event) {
+		require_once __DIR__ . '/EasySlugger/SluggerInterface.php';
+		require_once __DIR__ . '/EasySlugger/Utf8Slugger.php';
+		$value = $event->arguments(0);
+		$options = $this->getOptions($event->arguments(1));
+		$method = $options['unique'] ? 'uniqueSlugify' : 'slugify';
+		$event->return = \EasySlugger\Utf8Slugger::$method($value, $options['separator']);
+	}
+
+	/**
+	 * Sanitizer::seoSlugger()
+	 *
+	 * @param HookEvent $event
+	 */
+	protected function seoSlugger(HookEvent $event) {
+		require_once __DIR__ . '/EasySlugger/SluggerInterface.php';
+		require_once __DIR__ . '/EasySlugger/Slugger.php';
+		require_once __DIR__ . '/EasySlugger/SeoSlugger.php';
+		$value = $event->arguments(0);
+		$options = $this->getOptions($event->arguments(1));
+		$method = $options['unique'] ? 'uniqueSlugify' : 'slugify';
+		$event->return = \EasySlugger\SeoSlugger::$method($value, $options['separator']);
+	}
+
+	/**
+	 * Sanitizer::seoSlugger()
+	 *
+	 * @param HookEvent $event
+	 */
+	protected function seoUtf8Slugger(HookEvent $event) {
+		require_once __DIR__ . '/EasySlugger/SluggerInterface.php';
+		require_once __DIR__ . '/EasySlugger/Slugger.php';
+		require_once __DIR__ . '/EasySlugger/SeoUtf8Slugger.php';
+		$value = $event->arguments(0);
+		$options = $this->getOptions($event->arguments(1));
+		$method = $options['unique'] ? 'uniqueSlugify' : 'slugify';
+		$event->return = \EasySlugger\SeoUtf8Slugger::$method($value, $options['separator']);
+	}
+
+	/**
+	 * Get options
+	 */
+	protected function getOptions($options) {
+		if(!is_array($options)) return $this->default_options;
+		return array_merge($this->default_options, $options);
+	}
+
+}
