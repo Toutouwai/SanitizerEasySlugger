@@ -29,7 +29,7 @@ $slug = $sanitizer->utf8Slugger('这个用汉语怎么说');
 
 ### seoSlugger($string, $options)
 
-Augments the strings before turning them into slugs. The conversions are related to numbers, currencies, email addresses and other common symbols.
+Augments the string before turning it into a slug. The conversions are related to numbers, currencies, email addresses and other common symbols.
 
 ```php
 $slug = $sanitizer->seoSlugger('The price is $5.99');
