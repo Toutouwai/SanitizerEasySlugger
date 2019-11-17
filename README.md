@@ -49,7 +49,7 @@ $slug = $sanitizer->seoUtf8Slugger('价钱是 $5.99');
 ### $options argument
 
 Each of the methods can take an `$options` array as a second argument.
-* `separator` (string): the character that separates words in the slug. Default: `-`
+* `separator` (string): the character that separates words in the slug. Default: `-`
 * `unique` (bool): Determines whether a random suffix is added at the end of the slug. Default: `false`
 
 ```php
