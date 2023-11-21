@@ -9,9 +9,9 @@ class SanitizerEasySlugger extends WireData implements Module {
 		return array(
 			'title' => 'Sanitizer EasySlugger',
 			'summary' => 'Allows the use of the EasySlugger library as Sanitizer methods.',
-			'version' => '0.1.0',
+			'version' => '0.1.1',
 			'author' => 'Robin Sallis',
-			'href' => 'https://github.com/Toutouwai/SanitizerSlugger',
+			'href' => 'https://github.com/Toutouwai/SanitizerEasySlugger',
 			'icon' => 'globe',
 			'autoload' => true,
 			'requires' => 'ProcessWire>=3.0.0, PHP>=5.4.0',
